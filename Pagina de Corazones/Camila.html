@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Corazones y Fotos Dinámicas Mejoradas</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    /* Corazones */
+    .heart {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      opacity: 0.9;
+      animation: fall linear forwards;
+    }
+
+    /* Fotos */
+    .falling-photo {
+      position: absolute;
+      top: -100px;
+      width: 80px;
+      height: auto;
+      opacity: 0.7; /* más desvanecidas */
+      border-radius: 10px;
+      animation: fall linear forwards;
+    }
+
+    /* Animación de caída con rotación y desvanecido */
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const images = [
+      "img/Captura1.PNG",
+      "img/Captura2.PNG",
+      "img/Captura3.PNG",
+      "img/Captura4.PNG",
+      "img/Captura5.PNG",
+      "img/Captura6.PNG",
+      "img/Captura7.PNG",
+      "img/Captura8.PNG",
+      "img/Captura9.PNG",
+      "img/Captura10.PNG",
+      "img/Captura11.PNG"
+    ];
+
+    const colors = ["#ff69b4", "#ffc0cb", "#ffb6c1", "#ff1493", "#ff80aa"];
+
+    // Crear corazones
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.animationDuration = Math.random() * 4 + 3 + "s"; // 3s a 7s
+      heart.style.zIndex = 1;
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    // Crear fotos cayendo
+    function createPhoto() {
+      const img = document.createElement("img");
+      img.classList.add("falling-photo");
+      img.src = images[Math.floor(Math.random() * images.length)];
+      img.style.left = Math.random() * 100 + "vw";
+      img.style.width = Math.random() * 60 + 40 + "px"; // tamaños variables
+      img.style.animationDuration = Math.random() * 5 + 4 + "s"; // 4s a 9s
+      img.style.zIndex = 1;
+      document.body.appendChild(img);
+
+      setTimeout(() => {
+        img.remove();
+      }, 9000);
+    }
+
+    // Corazones más frecuentes
+    setInterval(createHeart, 80);
+
+    // Fotos cayendo cada 800ms
+    setInterval(createPhoto, 800);
+  </script>
+</body>
+</html>
